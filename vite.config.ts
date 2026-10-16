@@ -29,7 +29,11 @@ export default defineConfig({
     port: 8000,
     strictPort: true,
     allowedHosts: ['sam-resendez.exe.xyz'],
-    hmr: { protocol: 'wss', host: 'sam-resendez.exe.xyz', clientPort: 443 },
+    // Behind the exe.dev HTTPS proxy, HMR must connect via the public host on 443.
+    // Locally, leave PUBLIC_HMR_HOST unset so Vite uses its default (same host/port).
+    hmr: process.env.PUBLIC_HMR_HOST
+      ? { protocol: 'wss', host: process.env.PUBLIC_HMR_HOST, clientPort: 443 }
+      : true,
     watch: { ignored: ['**/data/**'] },
   },
   preview: {

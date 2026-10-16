@@ -49,7 +49,7 @@ The service starts at boot and restarts on failure. Page edits use Vite HMR; res
 ## Proxy and deployment
 - Browser URL: `https://sam-resendez.exe.xyz/`; local checks: `http://localhost:8000/`.
 - HTTPS is terminated by the exe.dev proxy. Vite binds HTTP on `0.0.0.0:8000`.
-- Keep an explicit Vite host allowlist; do not use `allowedHosts: true`. HMR uses secure WebSockets through external port 443.
+- Keep an explicit Vite host allowlist; do not use `allowedHosts: true`. HMR uses secure WebSockets through external port 443 when `PUBLIC_HMR_HOST` is set (the systemd unit sets it); leave it unset for local development.
 - This is the requested development server, not a hardened production deployment. The exe.dev proxy controls access; don't assume the site is publicly anonymous. Before a public launch, use a production application/static server and review authentication and exposure.
 
 ## Change workflow

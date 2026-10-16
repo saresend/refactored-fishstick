@@ -8,6 +8,7 @@ User=exedev
 WorkingDirectory=/home/exedev/personal-site
 Environment=PATH=/home/exedev/node/bin:/usr/local/bin:/usr/bin:/bin
 Environment=DATABASE_PATH=/home/exedev/personal-site/data/site.sqlite
+Environment=PUBLIC_HMR_HOST=sam-resendez.exe.xyz
 ExecStart=/home/exedev/node/bin/node /home/exedev/personal-site/node_modules/vite/bin/vite.js
 Restart=on-failure
 RestartSec=3
