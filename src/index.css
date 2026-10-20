@@ -1,15 +1,39 @@
-/* Sampled from sample-bg.png: a 2px black checkerboard over a dark gray gradient (#101010 at top to #343434 at bottom). */
+/* Noctis palette: https://terminalcolors.com/themes/noctis/default/
+   Headings use Canela Deck (Commercial Type, licensed) when it's installed, falling back to
+   Instrument Serif. To self-host a licensed copy, put the woff2 files in public/fonts/ and add
+   e.g. url('/fonts/CanelaDeck-Regular.woff2') format('woff2') to the src lists below. */
+@font-face { font-family: 'Canela Deck'; font-weight: 400; font-style: normal; font-display: swap; src: local('Canela Deck'), local('CanelaDeck-Regular'); }
+@font-face { font-family: 'Canela Deck'; font-weight: 300; font-style: normal; font-display: swap; src: local('Canela Deck Light'), local('CanelaDeck-Light'); }
+
 :root {
+  --bg: #03191b;
+  --fg: #b2cacd;
+  --sel: #083d44;
+  --dim: #324a4d;      /* black */
+  --muted: #47686c;    /* bright black */
+  --fg-hi: #c1d4d7;    /* bright white */
+  --red: #e66533;
+  --green: #49e9a6;
+  --yellow: #e4b781;
+  --blue: #49ace9;
+  --magenta: #df769b;
+  --cyan: #49d6e9;
+  --orange: #e69533;   /* bright yellow */
+  /* Two derived surfaces: one step darker for bars, one lighter for panels */
+  --bar: #021214;
+  --surface: #052529;
+
+  --display: 'Canela Deck', 'Instrument Serif', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   color-scheme: dark;
-  background-color: #222;
-  background-image:
-    conic-gradient(#000 25%, transparent 0 50%, #000 0 75%, transparent 0),
-    linear-gradient(#101010, #343434);
-  background-size: 4px 4px, 100% 100%;
-  background-attachment: fixed;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: transparent; }
+html { background: var(--bg); scroll-padding-top: 48px; }
+body { margin: 0; min-width: 320px; min-height: 100svh; background: var(--bg); color: var(--fg); font: 400 15px/1.75 var(--mono); }
+a { color: inherit; }
+::selection { background: var(--sel); color: var(--fg-hi); }
+:focus-visible { outline: 1px solid var(--cyan); outline-offset: 2px; }

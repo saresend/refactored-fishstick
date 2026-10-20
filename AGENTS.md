@@ -3,8 +3,12 @@
 ## Project
 - Root: `/home/exedev/personal-site`. React + TypeScript + Vite, using npm and its committed lockfile.
 - Node.js 24+ required; this VM uses `/home/exedev/node/bin/node`.
-- This is an intentionally minimal coming-soon page, not a finished personal site.
-- `src/App.tsx` and `src/App.css`: page content and styling. `src/index.css`: global styling.
+- A small personal site: home, about, and a writing page listing posts and projects. Design: "tui chic" (vim-airline style tabline, Noctis palette, display serif headings, JetBrains Mono text).
+- `src/App.tsx`: route → page. `src/router.ts`: tiny History API router (`/`, `/about`, `/writing`, `/writing/:slug`); plain `<a href>` links to known routes navigate client-side. `src/pages/`, `src/components/`: views and shared UI.
+- `src/App.css`: component styling. `src/index.css`: Noctis tokens, fonts, global styling.
+- Posts: one markdown file per post in `content/posts/<slug>.md` (lowercase-kebab-case slug, served at `/writing/<slug>`). Frontmatter is flat `key: value`: `title` and `date` (YYYY-MM-DD) required; `tags` (comma-separated), `summary`, `draft: true` optional. Drafts appear in dev only. Fenced code takes a language and optional title: ```` ```ts src/file.ts ````.
+- `src/posts.ts` bundles posts with `import.meta.glob`; `src/markdown.ts` parses frontmatter and renders with `marked`. Invalid frontmatter throws, failing the build and `npm test`. Post HTML is trusted (repo-authored); don't render untrusted markdown through it.
+- `src/projects.ts`: the projects list on the writing page.
 - `index.html`: React entry document and metadata. Put static files, images, and standalone HTML pages in `public/`; e.g. `public/about.html` is served at `/about.html`.
 - Don't replace the React root in `index.html` unless deliberately moving away from React.
 
@@ -23,7 +27,7 @@
 ```sh
 npm ci                # install exact dependencies
 npm run dev           # 0.0.0.0:8000, strict port; Ctrl-C to stop
-npm test              # SQLite persistence and HTTP API tests using temporary databases
+npm test              # SQLite/API tests, markdown parsing, and validation of every post
 npm run lint          # oxlint
 npm run build         # TypeScript checks and optimized dist/ build
 npm run preview       # serve dist/ plus SQLite API on port 8000
@@ -55,5 +59,5 @@ The service starts at boot and restarts on failure. Page edits use Vite HMR; res
 ## Change workflow
 - Prefer small typed React components and plain CSS; avoid adding dependencies for simple tasks.
 - Run `npm test`, `npm run lint`, and `npm run build` after changes.
-- Smoke-test `/`, `/api/health`, and `/api/site`; verify the UI in a browser when changing it.
+- Smoke-test `/`, `/writing`, a post URL, `/api/health`, and `/api/site`; verify the UI in a browser when changing it.
 - Commit source, documentation, and package-lock.json; never commit node_modules, dist, or database files.

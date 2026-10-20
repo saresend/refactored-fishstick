@@ -8,9 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "node --test server/*.test.ts"
+    "test": "node --test server/*.test.ts src/*.test.ts"
   },
   "dependencies": {
+    "marked": "^18.0.14",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
