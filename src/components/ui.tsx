@@ -45,7 +45,12 @@ export function PostCard({ post }: { post: Post }) {
   )
 }
 
-// Placeholder destinations until the real accounts are filled in.
 export function Links() {
-  return <div className="links"><a href="#">github</a><a href="#">email</a><a href="#">rss</a></div>
+  return (
+    <div className="links">
+      <a href="https://github.com/saresend">github</a>
+      <a href="mailto:samresendez1@gmail.com">email</a>
+      <a href="https://x.com/samresendez1">x</a>
+    </div>
+  )
 }
