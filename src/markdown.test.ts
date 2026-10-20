@@ -21,7 +21,7 @@ test('posts parse metadata and render markdown', () => {
     '',
     '## Heading',
     '',
-    'Some `inline` code and a [link](/writing).',
+    'Some `inline` code and a [link](/writing) and an [external one](https://example.com/?a=1&b=2 "Example").',
     '',
     '```ts src/example.ts',
     'const tag = "<b>" && 1 < 2',
@@ -35,6 +35,7 @@ test('posts parse metadata and render markdown', () => {
   assert.match(post.html, /<h2>Heading<\/h2>/)
   assert.match(post.html, /<code>inline<\/code>/)
   assert.match(post.html, /<a href="\/writing">link<\/a>/)
+  assert.match(post.html, /<a href="https:\/\/example\.com\/\?a=1&amp;b=2" title="Example" target="_blank" rel="noopener noreferrer">external one<\/a>/)
   // Fenced code: title and language in the bar, contents escaped.
   assert.match(post.html, /<div class="code-bar"><span>src\/example\.ts<\/span><span>ts<\/span><\/div>/)
   assert.match(post.html, /<code class="language-ts">const tag = &quot;&lt;b&gt;&quot; &amp;&amp; 1 &lt; 2<\/code>/)

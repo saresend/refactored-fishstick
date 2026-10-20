@@ -12,7 +12,7 @@ export default function PostPage({ post }: { post: Post }) {
         items={[
           { label: post.date, tone: 'date' },
           { label: `${post.minutes} min read` },
-          ...post.tags.map((label) => ({ label, tone: 'tag' as const })),
+          ...post.tags.map((label) => ({ label })),
           ...(post.draft ? [{ label: 'draft' }] : []),
         ]}
       />

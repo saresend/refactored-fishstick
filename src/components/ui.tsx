@@ -1,5 +1,12 @@
 import type { ReactNode } from 'react'
+import { isExternal } from '../markdown.ts'
 import type { Post } from '../markdown.ts'
+
+// A link that opens off-site URLs in a new tab.
+export function A({ href, className, children }: { href: string; className?: string; children: ReactNode }) {
+  const external = isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+  return <a href={href} className={className} {...external}>{children}</a>
+}
 
 export function Eyebrow({ path }: { path: string }) {
   return <p className="eyebrow"><b>~/sam-resendez</b> / {path}</p>
@@ -9,7 +16,7 @@ export function Rule({ n, children }: { n: string; children: ReactNode }) {
   return <div className="rule"><span>{n}</span> {children}</div>
 }
 
-export type Pill = { label: string; tone?: 'tag' | 'date' }
+export type Pill = { label: string; tone?: 'date' }
 
 export function Pills({ items, className = '' }: { items: Pill[]; className?: string }) {
   return (
@@ -30,7 +37,7 @@ export function Card({ href, meta, title, summary, pills }: CardProps) {
       <Pills items={pills} />
     </>
   )
-  return href ? <a className="card" href={href}>{body}</a> : <div className="card">{body}</div>
+  return href ? <A className="card" href={href}>{body}</A> : <div className="card">{body}</div>
 }
 
 export function PostCard({ post }: { post: Post }) {
@@ -40,7 +47,7 @@ export function PostCard({ post }: { post: Post }) {
       meta={<time dateTime={post.date}>{post.date}</time>}
       title={post.title}
       summary={post.summary}
-      pills={[...post.tags.map((label) => ({ label, tone: 'tag' as const })), { label: `${post.minutes} min` }]}
+      pills={[...post.tags.map((label) => ({ label })), { label: `${post.minutes} min` }]}
     />
   )
 }
@@ -48,9 +55,9 @@ export function PostCard({ post }: { post: Post }) {
 export function Links() {
   return (
     <div className="links">
-      <a href="https://github.com/saresend">github</a>
-      <a href="mailto:samresendez1@gmail.com">email</a>
-      <a href="https://x.com/samresendez1">x</a>
+      <A href="https://github.com/saresend">github</A>
+      <A href="mailto:samresendez1@gmail.com">email</A>
+      <A href="https://x.com/samresendez1">x</A>
     </div>
   )
 }

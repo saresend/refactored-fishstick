@@ -1,6 +1,6 @@
 import { Card, Eyebrow, PostCard, Rule } from '../components/ui.tsx'
 import { posts } from '../posts.ts'
-import { projects } from '../projects.ts'
+import { sideQuests } from '../sideQuests.ts'
 
 export default function Writing() {
   return (
@@ -12,18 +12,15 @@ export default function Writing() {
       {posts.length === 0 && <p className="empty">Nothing here yet.</p>}
       {posts.map((post) => <PostCard key={post.slug} post={post} />)}
 
-      <Rule n="02">projects</Rule>
-      {projects.map((project) => (
+      <Rule n="02">side-quests</Rule>
+      {sideQuests.map((quest) => (
         <Card
-          key={project.name}
-          href={project.href}
-          meta={project.when}
-          title={project.name}
-          summary={project.summary}
-          pills={[
-            ...project.tags.map((label) => ({ label, tone: 'tag' as const })),
-            ...(project.status ? [{ label: project.status, tone: 'date' as const }] : []),
-          ]}
+          key={quest.name}
+          href={quest.href}
+          meta={quest.meta}
+          title={quest.name}
+          summary={quest.summary}
+          pills={quest.tags.map((label) => ({ label }))}
         />
       ))}
     </>

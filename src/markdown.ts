@@ -28,8 +28,17 @@ export function parseFrontmatter(source: string): { data: Record<string, string>
 const escapeHtml = (text: string) =>
   text.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
 
+export const isExternal = (href: string) => /^https?:\/\//i.test(href)
+
 const marked = new Marked({
   renderer: {
+    // Off-site links open in a new tab; on-site links stay in place.
+    link({ href, title, tokens }) {
+      const text = this.parser.parseInline(tokens)
+      const titleAttr = title ? ` title="${escapeHtml(title)}"` : ''
+      const target = isExternal(href) ? ' target="_blank" rel="noopener noreferrer"' : ''
+      return `<a href="${escapeHtml(href)}"${titleAttr}${target}>${text}</a>`
+    },
     // ```css theme.css  →  a code box with "theme.css" and "css" in its title bar.
     code({ text, lang }) {
       const [language = '', ...title] = (lang ?? '').trim().split(/\s+/)
