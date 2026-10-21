@@ -17,7 +17,7 @@ export default function PostPage({ post }: { post: Post }) {
         ]}
       />
       {/* Rendered from our own markdown files at build time, so the HTML is trusted. */}
-      <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
+      <div className="prose post-body" dangerouslySetInnerHTML={{ __html: post.html }} />
     </article>
   )
 }

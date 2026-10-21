@@ -24,6 +24,7 @@
   --surface: #052529;
 
   --display: 'Canela Deck', 'Instrument Serif', Georgia, serif;
+  --text: 'Lora', Georgia, serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   color-scheme: dark;
   font-synthesis: none;
@@ -33,7 +34,7 @@
 
 * { box-sizing: border-box; }
 html { background: var(--bg); scroll-padding-top: 48px; }
-body { margin: 0; min-width: 320px; min-height: 100svh; background: var(--bg); color: var(--fg); font: 400 15px/1.75 var(--mono); }
+body { margin: 0; min-width: 320px; min-height: 100svh; background: var(--bg); color: var(--fg); font: 400 15px/1.75 var(--text); }
 a { color: inherit; }
 ::selection { background: var(--sel); color: var(--fg-hi); }
 :focus-visible { outline: 1px solid var(--cyan); outline-offset: 2px; }
